@@ -1,18 +1,25 @@
 var http = require('http'),
-    server = http.createServer(function (req, res) {
-      res.writeHead(200);
-      res.end('node serverinjo');
-    });
-//var io = require('socket.io')(3017);
-//
-//io.on('connection', function(socket){
-//  socket.on('connect', function(msg){
-//    console.log('listeni cng on *:3000');
-//  });
-//});
+    express = require('express'),
+    app = express()
+    ;
 
-server.listen(3017, 'http://push-local.com');
+app.get('/', function (req, res) {
+    res.send('Hello World!')
+});
+
+var server = app.listen(3017, function(){}),
+    io = require('socket.io')(server)
+    ;
+
+io.on('connection', function(socket){
+    console.log('listeni cng on *:3000');
+    socket.on('messaga', function(msg){
+        io.emit('messaga', msg);
+        console.log('sent ' + msg.message);
+    });
+});
 
 //server.listen(3017, function(){
-//  console.log('listening on *:3000');
+//    console.log('on *:3000');
 //});
+

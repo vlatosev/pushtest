@@ -8,6 +8,9 @@
     </head>
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+          {% javascripts '../node_modules/socket.io/node_modules/socket.io-client/socket.io.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}        {% block js_footer %}{% endblock %}
     </body>
 </html>

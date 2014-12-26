@@ -1,1 +1,42 @@
-Hello {{ name }}!
+{% extends "::base.html.twig" %}
+
+{% block body %}
+  <form id="js-message-enter">
+    <input id="js-message-value" type="text" name="message" value="" />
+    <button type="submit">send</button>
+  </form>
+  <ul id="conversation-lis"><li></li></ul>
+{% endblock %}
+
+{% block js_footer %}
+  <script>
+    var socket,
+        list = $('#conversation-lis'),
+        form = $('#js-message-enter')
+        ;
+    $(document).ready(function(){
+      socket = io.connect('http://localhost:3017');
+      socket.on('connect', function () {
+        var message = {
+          name: '{{ name }} connected',
+          message: ''
+        };
+        socket.emit('messaga', message);
+      });
+      socket.on('messaga', function (data) {
+        list.append('<li><b>' + data.name + ':</b> ' + data.message + '</li>');
+      });
+
+      form.on('submit', function(ev){
+        ev.preventDefault();
+        var message = {
+          name: '{{ name }}',
+          message: $('#js-message-value').val()
+        };
+        socket.emit('messaga', message);
+        ev.target.reset();
+      });
+
+    });
+  </script>
+{% endblock %}
