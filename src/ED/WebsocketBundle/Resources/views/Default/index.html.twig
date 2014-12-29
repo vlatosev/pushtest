@@ -15,7 +15,7 @@
         form = $('#js-message-enter')
         ;
     $(document).ready(function(){
-      socket = io.connect('http://localhost:3017');
+      socket = io.connect('http://localhost:3017?dererer=9');
       socket.on('connect', function () {
         var message = {
           name: '{{ name }} connected',
