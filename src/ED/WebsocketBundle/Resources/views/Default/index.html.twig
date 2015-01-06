@@ -6,6 +6,7 @@
     <button type="submit">send</button>
   </form>
   <ul id="conversation-lis"><li></li></ul>
+  <p>{{ response }}</p>
 {% endblock %}
 
 {% block js_footer %}
@@ -15,7 +16,7 @@
         form = $('#js-message-enter')
         ;
     $(document).ready(function(){
-      socket = io.connect('http://192.168.1.209:3017?node_cookie=yysy');
+      socket = io.connect('http://192.168.1.209:3017?node_cookie=yyy');
       socket.on('connect', function () {
         var message = {
           name: '{{ name }} connected',
