@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * User
  *
- * @ORM\Table()
+ * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
  */
 class User extends \FOS\UserBundle\Model\User
@@ -24,7 +24,7 @@ class User extends \FOS\UserBundle\Model\User
     /**
      * @var string
      *
-     * @ORM\Column(name="first_name", type="string", length=255, nullable=true)
+     * @ORM\Column(name="first_name", type="string", length=127, nullable=true)
      */
     private $firstName;
 

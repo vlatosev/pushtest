@@ -15,8 +15,13 @@ class DefaultController extends Controller
      */
     public function indexAction($name)
     {
-        $client = new Client('http://localhost:3017');
-        $response = $client->get('/')->send();
+        $client = new Client('http://localhost');
+        $request = $client->createRequest('POST', '/', [
+            'body' => [
+                'message' => 'hello'
+            ]]);
+        $request->setPort(3017);
+        $response = $request->send();
         return array(
             'name' => $name,
             'response' => $response->getBody()

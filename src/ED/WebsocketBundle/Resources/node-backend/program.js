@@ -7,7 +7,11 @@ var http = require('http'),
     ;
 
 app.get('/', function (req, res) {
-    res.send('Hello World!')
+    res.send('Hello Worldxc!')
+});
+
+app.post('/', function (req, res) {
+    res.send('Hello Worldxc!')
 });
 
 
