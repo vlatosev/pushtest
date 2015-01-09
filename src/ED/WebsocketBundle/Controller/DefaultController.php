@@ -2,29 +2,33 @@
 
 namespace ED\WebsocketBundle\Controller;
 
-use Guzzle\Http\Client;
+use GuzzleHttp\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class DefaultController extends Controller
 {
-    /**
-     * @Route("/test-push/{name}", name="test_push")
-     * @Template()
-     */
-    public function indexAction($name)
-    {
-        $client = new Client('http://localhost');
-        $request = $client->createRequest('POST', '/', [
-            'body' => [
-                'message' => 'hello'
-            ]]);
-        $request->setPort(3017);
-        $response = $request->send();
-        return array(
-            'name' => $name,
-            'response' => $response->getBody()
-        );
-    }
+  /**
+   * @Route("/test-push/{name}", name="test_push")
+   * @Template()
+   */
+  public function indexAction($name)
+  {
+    $session = $this->get('session')->getId();
+//        $session = $this->get('session.storage')->getBag($this->container->getParameter('session.storage.options'));
+    $client = new Client([
+        'base_url' => 'http://localhost:3017',
+    ]);
+    $request = $client->createRequest('POST', '/registser', [
+        'json' => [
+            'session_id' => $session,
+            'message' => 'hello'
+        ]]);
+    $response = $client->send($request);
+    return array(
+        'name' => $name,
+        'response' => $response->getBody()
+    );
+  }
 }
