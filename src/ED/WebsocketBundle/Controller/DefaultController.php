@@ -20,7 +20,7 @@ class DefaultController extends Controller
     $client = new Client([
         'base_url' => 'http://localhost:3017',
     ]);
-    $request = $client->createRequest('POST', '/registser', [
+    $request = $client->createRequest('POST', '/register-user', [
         'json' => [
             'session_id' => $session,
             'message' => 'hello'

@@ -36,15 +36,10 @@ io.on('connection', function (socket)
   users[socket.id] = socket;
   var rk = socket.request._query;
   var a = 2;
-  if (rk.node_cookie == 'yyy') {
-    socket.on('messaga', function (msg)
-    {
-      msg.message = socket.id;
-      io.emit('messaga', msg);
-      console.log('sent ' + msg.message);
-    });
-  }
-  else {
-    socket.disconnect();
-  }
+  socket.on('messaga', function (msg)
+  {
+    msg.message = rk.node_cookie;
+    io.emit('messaga', msg);
+    console.log('sent ' + msg.message);
+  });
 });
