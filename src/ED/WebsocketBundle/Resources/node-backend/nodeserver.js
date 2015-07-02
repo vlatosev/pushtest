@@ -117,7 +117,7 @@
       var allclients = getClientsBySocketId(socket.id);
       for (var i=0; i<allclients.socketid.length; i++) {
         var sockid = allclients.socketid[i];
-        io.sockets.socket(sockid).emit('notice', { msg: '<a href="#">This client has id: '+sockid+'</a>' } );
+        io.sockets.socket(sockid).emit('notice', { msg: '<a href="#">This client has id: ' + sockid + '</a>' } );
       }
       
     });
